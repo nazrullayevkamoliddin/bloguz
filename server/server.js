@@ -7,14 +7,16 @@ import User from './Schema/User.js';
 import { nanoid } from 'nanoid';
 import jwt from 'jsonwebtoken';
 
+import cors from 'cors';
+
 const server = express();
-let PORT = 3000;
+let PORT = 8080;
 
 let emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/; // regex for email
 let passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/; // regex for password
 
 server.use(express.json());
-
+server.use(cors());
 mongoose.connect(process.env.DB_LOCATION, {
     autoIndex:true 
 });
@@ -112,5 +114,5 @@ server.post('/signin', (req, res) => {
 })
 
 server.listen(PORT, () => {
-    console.log('listening on port => 3000')
+    console.log('listening on port => 8080')
 })
